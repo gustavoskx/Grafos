@@ -3,6 +3,7 @@ package ListaDeAdjacencia;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.ArrayList;
 
 public class Graph {
     private HashMap<Node, LinkedList<Node>> map;
@@ -49,14 +50,29 @@ public class Graph {
 
     public void bfs(Node node){
         Queue<Node> queue = new LinkedList<>();
-        //ArrayList<> vist = new ArrayList<>();
+        ArrayList<Node> vist = new ArrayList<>();
+
         queue.add(node);
+        vist.add(node);
 
         while (!queue.isEmpty()) {
+
             Node w;
             w = queue.poll();
             w.setCor(true);
 
+            for(Node z : map.get(w)) {
+                if(!z.isCor()){
+                    vist.add(z);
+                    z.setCor(true);
+                    queue.add(z);
+                }
+            }
+        }
+
+        for(Node n : vist){
+            System.out.print(n.getValue() + " ->");
+            System.out.print(n.isCor() + " ");
         }
     }
 }
