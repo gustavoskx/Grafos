@@ -19,6 +19,8 @@ public class Main {
         grafo.addEdge(nodeD, nodeE);
         grafo.printMap();
 
+        grafo.dfs(nodeA);
+        grafo.pintarNodes();
         grafo.bfs(nodeA);
     }
 }

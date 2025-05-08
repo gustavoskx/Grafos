@@ -70,9 +70,48 @@ public class Graph {
             }
         }
 
+        System.out.print("Ordem de visita bfs: ");
         for(Node n : vist){
-            System.out.print(n.getValue() + " ->");
+            System.out.print(n.getValue() + "->");
             System.out.print(n.isCor() + " ");
+        }
+        System.out.println();
+    }
+
+    private void dfs_visit(Node node, ArrayList<Node> visit) {
+        for(Node v : map.get(node)){
+            if(!v.isCor()){
+                visit.add(v);
+                v.setCor(true);
+                dfs_visit(v, visit);
+            }
+        }
+    }
+
+    public void dfs(Node node){
+        ArrayList<Node> vist = new ArrayList<>();
+        vist.add(node);
+        node.setCor(true);
+
+        for(Node u : map.get(node)){
+            if(!u.isCor()){
+                vist.add(u);
+                u.setCor(true);
+                dfs_visit(u, vist);
+            }
+        }
+
+        System.out.print("Ordem de visita dfs: ");
+        for(Node v : vist){
+            System.out.print(v.getValue() + "->");
+            System.out.print(v.isCor() +  " ");
+        }
+        System.out.println();
+    }
+
+    public void pintarNodes(){
+        for(Node v : getMap().keySet()){
+            v.setCor(false);
         }
     }
 }
